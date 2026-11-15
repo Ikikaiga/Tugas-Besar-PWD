@@ -3,6 +3,7 @@
     "git.ignoredRepositories": [
         "E:\\PWD",
         "e:\\PWD"
-    ]
+    ],
+    "git.autofetch": true
 }
 
