@@ -1,45 +1,39 @@
 <?php
-    session_start();
-    require 'koneksi.php';
+session_start();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = trim($_POST['username'] ?? '');
-        $password = $_POST['password'] ?? '';
+$user_email = "admin@nightmarket.com";
+$user_pass  = "123456";
 
-        if ($username === '' || $password === '') {
-            echo '<p style="color: red;">!! Harap lengkapi semua data. !!</p>';
-            echo '<a href="Login.xhtml">Kembali</a>';
-            exit;
-        }
+$email    = isset($_POST['email']) ? trim($_POST['email']) : "";
+$password = isset($_POST['password']) ? $_POST['password'] : "";
 
-        $stmt = mysqli_prepare($conn, "SELECT id, username, password FROM akun WHERE username = ? OR email = ?");
-        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        if ($row = mysqli_fetch_assoc($result)) {
-            if ($password === $row['password']) {
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['username'] = $row['username'];
-
-                echo "<h2>Login Berhasil</h2>";
-                echo "<p>Selamat datang, " . htmlspecialchars($row['username']) . "!</p>";
-                echo '<a href="index.xhtml">Masuk ke Halaman Utama</a>';
-                exit;
-            } else {
-                echo "<p style='color:red;'>!! Password yang Anda masukkan salah. !!</p>";
-                echo '<a href="Login.xhtml">Kembali ke Halaman Login</a>';
-            }
-        } else {
-            echo "<p style='color:red;'>!! Username atau Email tidak terdaftar. !!</p>";
-            echo '<a href="Login.xhtml">Kembali ke Halaman Login</a>';
-        }
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);
-    } else {
-        echo "<p>Halaman tidak valid.</p>";
-        echo '<a href="Login.xhtml">Kembali ke Login</a>';
-        exit;
-    }
+if ($email === "" || $password === "") {
+    $pesan = "Email dan password harus diisi.";
+    $ok = false;
+} elseif ($email === $user_email && $password === $user_pass) {
+    $_SESSION['email'] = $email;
+    $pesan = "Login berhasil. Selamat datang, " . htmlspecialchars($email) . "!";
+    $ok = true;
+} else {
+    $pesan = "Email atau password salah.";
+    $ok = false;
+}
 ?>
-
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+  <title>Nightmarket - Hasil Login</title>
+  <link rel="stylesheet" type="text/css" href="login.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" />
+</head>
+<body>
+  <h1 class="brand">NIGHTMARKET</h1>
+  <div class="card">
+    <h2><?php echo $ok ? "Berhasil" : "Gagal"; ?></h2>
+    <p class="msg"><?php echo $pesan; ?></p>
+    <p class="reg"><a href="index.xhtml">Kembali ke login</a></p>
+  </div>
+</body>
+</html>
