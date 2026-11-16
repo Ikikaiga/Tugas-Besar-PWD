@@ -1,0 +1,86 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #05060f url('bg_login.jpg') center / cover no-repeat fixed;
+  color: #e8f6ff;
+  font-family: Rajdhani, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.brand {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  margin: 0;
+  font-family: Orbitron, sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: #fcee0a;
+  text-shadow: 2px 0 #ff2a6d, -2px 0 #00f0ff;
+}
+
+.card {
+  width: 340px;
+  padding: 30px 28px;
+  background: rgba(8, 10, 28, 0.55);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.card h2 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-family: Orbitron, sans-serif;
+  font-size: 22px;
+  color: #00f0ff;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 8px 2px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #00f0ff;
+  color: #fff;
+  font: inherit;
+}
+
+input::placeholder { color: #0c75d7; }
+input:focus { outline: none; border-bottom-color: #fcee0a; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+a { color: #ff2a6d; text-decoration: none; }
+a:hover { color: #fcee0a; }
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  background: #fcee0a;
+  color: #000;
+  font-family: Orbitron, sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.btn:hover { background: #51e1eb; }
+
+.reg { text-align: center; margin: 18px 0 0; font-size: 15px; }
+.msg { color: #880d30; text-align: center; }
