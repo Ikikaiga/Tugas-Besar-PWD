@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar — Topu - Tugas Besar Web</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" />
+  <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+
+<div class="split">
+  <!-- LEFT: Register form -->
+  <div class="form-side">
+    <div class="form-inner">
+      <div class="form-title">Buat<br />Akun.</div>
+      <div class="form-sub">Mulai perjalanan finansialmu (Tugas Besar Web)</div>
+      <form id="registerForm" action="register.php" method="post">
+        <div class="f-group">
+          <label class="f-label" for="regUser">Nama Pengguna</label>
+          <input class="f-input" type="text" id="regUser" name="username" placeholder="minimal 3 karakter" autocomplete="username" required="required" />
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="regPass">Kata Sandi</label>
+          <div class="pw-wrap">
+            <input class="f-input" type="password" id="regPass" name="password" placeholder="minimal 6 karakter" autocomplete="new-password" required="required" />
+            <button type="button" class="pw-toggle" onclick="togglePw('regPass', this)" title="Tampilkan / Sembunyikan Password">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="regConfirm">Konfirmasi Sandi</label>
+          <div class="pw-wrap">
+            <input class="f-input" type="password" id="regConfirm" name="confirm_password" placeholder="ulangi kata sandi" autocomplete="new-password" required="required" />
+            <button type="button" class="pw-toggle" onclick="togglePw('regConfirm', this)" title="Tampilkan / Sembunyikan Password">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+        <button type="submit" id="submit" name="submit" class="f-btn">
+          <span>Daftar</span><span class="material-symbols-outlined" style="font-size:18px;">how_to_reg</span>
+        </button>
+      </form>
+      <div class="f-switch">Sudah punya akun? <a href="Login.xhtml" onclick="goTo('Login.xhtml'); return false;">Masuk di sini</a></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: 3D Neo-Brutalist geometric wall (mirrored) -->
+  <div class="geo-side">
+    <div id="geoCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+    <div class="geo-brand">
+      <div class="geo-brand-name">TRIMON</div>
+      <div class="geo-brand-tag">Catat · Kelola · Tumbuh - Tugas Besar PWD</div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div class="expand-overlay" id="expandOverlay">
+  <span class="expand-label"></span>
+  <span class="expand-welcome">Akun Dibuat! ✨</span>
+</div>
+
+<script type="text/javascript" src="register.js"></script>
+</body>
+</html>
