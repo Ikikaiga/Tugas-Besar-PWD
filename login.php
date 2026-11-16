@@ -1,39 +1,52 @@
 <?php
 session_start();
+require 'koneksi.php';
 
-$user_email = "admin@nightmarket.com";
-$user_pass  = "123456";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-$email    = isset($_POST['email']) ? trim($_POST['email']) : "";
-$password = isset($_POST['password']) ? $_POST['password'] : "";
+    if ($username === '' || $password === '') {
+        header("Location: Login.xhtml?error=empty");
+        exit;
+    }
 
-if ($email === "" || $password === "") {
-    $pesan = "Email dan password harus diisi.";
-    $ok = false;
-} elseif ($email === $user_email && $password === $user_pass) {
-    $_SESSION['email'] = $email;
-    $pesan = "Login berhasil. Selamat datang, " . htmlspecialchars($email) . "!";
-    $ok = true;
+    $stmt = mysqli_prepare($conn, "SELECT id, username, password FROM akun WHERE username = ? OR email = ?");
+    if (!$stmt) {
+        die("Query error: " . mysqli_error($conn));
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $isMatch = ($password === $row['password']) || (password_verify($password, $row['password']));
+
+        if ($isMatch) {
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+
+            $remember = !empty($_POST['remember']);
+            $expire = $remember ? (time() + (3600 * 24 * 30)) : (time() + (3600 * 24));
+            setcookie('user_name', $row['username'], $expire, '/');
+            setcookie('user_id', (string)$row['id'], $expire, '/');
+
+            header("Location: index.xhtml");
+            exit;
+        } else {
+            header("Location: Login.xhtml?error=wrong_password");
+            exit;
+        }
+    } else {
+        header("Location: Login.xhtml?error=user_not_found");
+        exit;
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
 } else {
-    $pesan = "Email atau password salah.";
-    $ok = false;
+    header("Location: Login.xhtml");
+    exit;
 }
 ?>
-<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
-<head>
-  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-  <title>Nightmarket - Hasil Login</title>
-  <link rel="stylesheet" type="text/css" href="login.css" />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" />
-</head>
-<body>
-  <h1 class="brand">NIGHTMARKET</h1>
-  <div class="card">
-    <h2><?php echo $ok ? "Berhasil" : "Gagal"; ?></h2>
-    <p class="msg"><?php echo $pesan; ?></p>
-    <p class="reg"><a href="index.xhtml">Kembali ke login</a></p>
-  </div>
-</body>
-</html>

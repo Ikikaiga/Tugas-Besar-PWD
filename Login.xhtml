@@ -3,45 +3,64 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Halaman Login</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk — Trimon - Tugas Besar Web</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-    <h2>Masuk ke Akun Anda</h2>
-    <p>Silakan masukkan username dan kata sandi Anda.</p>
 
-    <form action="login.php" method="post">
-        <table>
-            <tr>
-                <td><label for="username"><strong>Username / Email:</strong></label></td>
-                <td><input type="text" id="username" name="username" size="30" /></td>
-            </tr>
-            <tr>
-                <td><label for="password"><strong>Kata Sandi:</strong></label></td>
-                <td><input type="password" id="password" name="password" size="30" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="checkbox" id="remember" name="remember" value="1" />
-                    <label for="remember">Ingat Saya</label>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" id="submit" name="submit" value="Masuk" />
-                    <input type="reset" id="reset" name="reset" value="Batal" />
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <p><a href="#">Lupa Kata Sandi?</a></p>
-                    <p>Belum punya akun? <a href="#">Daftar di sini</a></p>
-                </td>
-            </tr>
-        </table>
-    </form>
+<div class="split">
+  <div class="geo-side">
+    <div id="geoCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+    <div class="geo-brand">
+      <div class="geo-brand-name">TRIMON</div>
+      <div class="geo-brand-tag">Catat · Kelola · Tumbuh - Tugas Besar PWD</div>
+    </div>
+  </div>
+
+  <div class="form-side">
+    <div class="form-inner">
+      <div class="form-title">Selamat<br />Datang.</div>
+      <div class="form-sub">Masuk ke akun Anda (Tugas Besar Web)</div>
+      
+      <form id="loginForm" action="login.php" method="post">
+        <div class="f-group">
+          <label class="f-label" for="username">Nama Pengguna / Email</label>
+          <input class="f-input" type="text" id="username" name="username" placeholder="cth: admin atau email@kampus.id" autocomplete="username" required="required" />
+        </div>
+        
+        <div class="f-group">
+          <label class="f-label" for="password">Kata Sandi</label>
+          <div class="pw-wrap">
+            <input class="f-input" type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required="required" />
+            <button type="button" class="pw-toggle" onclick="togglePw('password', this)" title="Tampilkan / Sembunyikan Password">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="f-check">
+          <input type="checkbox" id="remember" name="remember" value="1" />
+          <label for="remember">Ingat Saya di Perangkat Ini</label>
+        </div>
+
+        <button type="submit" id="submit" name="submit" class="f-btn">
+          <span>Masuk Sekarang</span>
+          <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="f-switch">
+        Belum punya akun? <a href="IHSG/register.html">Daftar sekarang</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script type="text/javascript" src="login.js"></script>
 </body>
 </html>
