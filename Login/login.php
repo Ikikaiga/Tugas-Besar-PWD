@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('user_name', $row['username'], $expire, '/');
             setcookie('user_id', (string)$row['id'], $expire, '/');
 
-            header("Location: ../index.xhtml");
+            header("Location: ../beranda/topup/index.xhtml");
             exit;
         } else {
             header("Location: Login.xhtml?error=wrong_password");
