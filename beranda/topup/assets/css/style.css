@@ -1,0 +1,89 @@
+:root{--ink:#111;--paper:#fff;--gold:#F5C800;--mute:#5b5b5b;--line:2px solid var(--ink);--sh:5px 5px 0 var(--ink)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:400 16px/1.5 "Work Sans",system-ui,sans-serif;color:var(--ink);background:#fff;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.narrow{max-width:760px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Latar putih dengan gelombang abu-abu yang bergerak halus -adam */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#fff}
+.bg i{position:absolute;left:-25%;width:150%;height:60%;border-radius:45% 55% 50% 50%/60% 50% 50% 40%;
+  background:linear-gradient(120deg,rgba(0,0,0,.05),rgba(0,0,0,.10));filter:blur(14px);will-change:transform}
+.bg i:nth-child(1){top:-10%;animation:drift 22s ease-in-out infinite alternate}
+.bg i:nth-child(2){top:30%;background:linear-gradient(60deg,rgba(0,0,0,.03),rgba(0,0,0,.09));animation:drift 30s ease-in-out -8s infinite alternate-reverse}
+.bg i:nth-child(3){top:62%;animation:drift 26s ease-in-out -14s infinite alternate}
+@keyframes drift{
+  0%{transform:translate3d(-6%,0,0) rotate(-4deg) scale(1)}
+  50%{transform:translate3d(4%,6%,0) rotate(3deg) scale(1.08);border-radius:55% 45% 40% 60%/45% 60% 40% 55%}
+  100%{transform:translate3d(8%,-4%,0) rotate(-2deg) scale(1.02)}}
+
+.top{background:rgba(255,255,255,.9);border-bottom:var(--line);position:sticky;top:0;z-index:5;backdrop-filter:blur(6px)}
+.bar0{display:flex;align-items:center;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
+.logo-box{display:grid;place-items:center;width:34px;height:34px;background:var(--gold);border:var(--line);box-shadow:3px 3px 0 var(--ink)}
+
+.btn{display:inline-block;background:#fff;border:var(--line);box-shadow:3px 3px 0 var(--ink);padding:10px 18px;font-weight:800;text-decoration:none;color:var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.gold{background:var(--gold)}
+.card{background:#fff;border:var(--line);box-shadow:var(--sh)}
+.pad{padding:20px}
+h2,.h2{font-size:20px;font-weight:900;margin:0 0 14px}
+
+.hero{padding:48px 0 20px;max-width:680px}
+.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.05;font-weight:900;margin:0 0 14px;letter-spacing:-.02em}
+.hero p{margin:0;color:var(--mute);font-size:18px}
+
+/* Daftar game: dua kolom ke bawah, kartu terakhir melebar info penting utk yg isi halaman pembayaran */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:20px 0 80px}
+.game{display:block;text-decoration:none;color:inherit;border-left:12px solid var(--c);transition:transform .15s,box-shadow .15s}
+.game:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.game:last-child{grid-column:1/-1}
+.ph{aspect-ratio:16/9;overflow:hidden;border-bottom:var(--line);background:#ddd}
+.game:last-child .ph{aspect-ratio:21/8}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px 16px}
+.gname{font-weight:900;font-size:clamp(18px,2.6vw,26px);line-height:1.15}
+.gcur{font-size:14px;color:var(--mute)}
+.go{background:var(--gold);border:var(--line);box-shadow:3px 3px 0 var(--ink);padding:6px 14px;font-weight:800;white-space:nowrap}
+
+/* Halaman pemesanan cihuy */
+.back{display:inline-block;margin:22px 0 14px;font-weight:700;color:var(--ink)}
+#page form{display:grid;gap:22px}
+#page{padding-bottom:40px}
+.banner{position:relative;margin-bottom:22px;border-left:12px solid var(--c)}
+.banner img{display:block;width:100%;aspect-ratio:21/9;object-fit:cover}
+.bcap{border-top:var(--line);padding:12px 18px}
+.bcap h1{margin:0;font-size:clamp(22px,4vw,32px);font-weight:900;line-height:1.1}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+label.f{display:grid;gap:4px;font-weight:600;font-size:14px}
+input[type=text]{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0}
+input[type=text]:focus{outline:none;background:#FFF6C2}
+.packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.opt span{display:block;border:var(--line);padding:12px;background:#fff;transition:background .12s,transform .12s,box-shadow .12s}
+.opt b{font-weight:900;font-size:18px}
+.opt small{display:block;color:var(--mute);font-size:14px}
+.opt input:checked+span{background:var(--gold);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.opt input:checked+span small{color:var(--ink)}
+.opt input:focus-visible+span{outline:3px solid var(--ink)}
+.bar{position:sticky;bottom:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;background:#fff;border:var(--line);box-shadow:var(--sh);padding:12px 18px}
+.tot small{display:block;color:var(--mute);font-size:13px;line-height:1.2}
+.tot b{font-size:24px;font-weight:900}
+.bar .err{flex:1;margin:0;min-width:140px}
+.err{color:#b00020;font-weight:600;font-size:14px}
+.dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin:16px 0}
+.dl dt{font-weight:800}.dl dd{margin:0;word-break:break-all}
+
+@media (max-width:560px){
+  .wrap{padding:0 14px}
+  .grid{gap:14px}
+  .game{border-left-width:8px}
+  .meta{flex-direction:column;align-items:flex-start;gap:8px;padding:10px 12px 12px}
+  .go{display:none}
+  .game:last-child .ph{aspect-ratio:16/9}
+  .bar .btn{width:100%;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
