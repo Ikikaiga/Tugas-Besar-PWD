@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Menu — NexusGame Store</title>
+    <link rel="stylesheet" type="text/css" href="home.css" />
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">
+            [Insert Name Here]
+        </div>
+
+        <div class="nav-links">
+            <a href="#" onclick="showPage('home'); return false;">Beranda</a>
+            <a href="#" onclick="showPage('catalog'); return false;">Daftar Game</a>
+            <a href=" " style="color: #ef4444;">Keluar</a>
+        </div>
+    </div>
+
+    <div id="home" class="page active">
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>
+                    Top-Up Game Tercepat<br />
+                    Untuk Seluruh Gamer Indonesia
+                </h1>
+
+                <p>
+                    Platform top-up game digital terpercaya untuk MLBB,
+                    Roblox, Warframe, Steam, dan Valorant dengan proses
+                    instan dan aman.
+                </p>
+
+                <a href="" class="btn-cta">Mulai Top-Up</a>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <h2>Pilihan Game Populer</h2>
+
+            <div class="game-grid">
+
+                <div class="game-card" onclick="pilihGame('Mobile Legends')">
+                    <h3>Mobile Legends</h3>
+                </div>
+
+                <div class="game-card" onclick="pilihGame('Roblox')">
+                    <h3>Roblox</h3>
+                </div>
+
+                <div class="game-card" onclick="pilihGame('Warframe')">
+                    <h3>Warframe</h3>
+                </div>
+
+                <div class="game-card" onclick="pilihGame('Steam Wallet')">
+                    <h3>Steam Wallet</h3>
+                </div>
+
+                <div class="game-card" onclick="pilihGame('Valorant')">
+                    <h3>Valorant</h3>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="home.js"></script>
+
+</body>
+</html>
