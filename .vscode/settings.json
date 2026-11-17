@@ -1,0 +1,9 @@
+{
+    "git.openRepositoryInParentFolders": "never",
+    "git.ignoredRepositories": [
+        "E:\\PWD",
+        "e:\\PWD"
+    ],
+    "git.autofetch": true
+}
+
