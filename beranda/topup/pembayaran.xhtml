@@ -18,7 +18,51 @@
 <main class="wrap narrow">
   <div class="card pad">
     <h1 class="h2">Halaman pembayaran</h1>
-    <p>Ini halaman sementara. Ganti seluruh isinya dengan halaman pembayaran buatan temanmu.</p>
+    <p>Silahkan periksa pesanan dan pilih metode pembayaran.</p>
+
+    <h2>Detail Pesanan</h2>
+    <dl id="detailPesanan" class="dl"></dl>
+    
+    <h2>Total yang Harus Dibayar</h2>
+    <h2 id="totalHarga">Rp 0</h2>
+
+    <h2>Metode Pembayaran</h2>
+    <div>
+      <label>
+        <input type="radio" id="transfer" name="metode" value="transfer"/>
+        Transfer Bank
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <input type="radio" id="qris" name="metode" value="qris"/>
+        QRIS
+      </label>
+    </div>
+
+    <p id="pesanError" class="err"></p>
+    <button class="btn gold" id="btnLanjut" type="button" onclick="lanjutBayar()">Lanjut Bayar</button>
+    <button class="btn" id="btnBatal" type="button" onclick="batalBayar()">Batal Bayar</button>
+
+    <div id="areaQRIS" hidden="hidden">
+      <h2>Scan QR Code</h2>
+      <p>Silahkan scan kode QR berikut.</p>
+
+      <div id="kodeQR">
+        QR CODE
+      </div>
+
+      <button class="btn gold" id="btnKonfirmasiQRIS" type="button" onclick="konfirmasiQRIS()">Konfirmasi Pembayaran</button>
+    </div>
+
+    <div id="areaBerhasil" hidden="hidden">
+      <h2>Pembayaran Berhasil</h2>
+      <p id="metodeBerhasil"></p>
+
+      <a class="btn gold" href="index.xhtml">Kembali ke daftar game</a>
+    </div>
+
     <!--
       DATA DARI order.xhtml (dua cara, pilih salah satu):
       1) Query string: ?game=mlbb&pack=1&item=172+Diamond&price=44000&acc_uid=123&acc_zone=456
@@ -26,22 +70,10 @@
       2) sessionStorage 'gv_checkout' (JSON): {game, gameName, pack, item, price, account:{...}}
       Catatan: kalau pakai backend, hitung ulang harga dari game + pack di server. Jangan percaya parameter price.- catatan by gustav pada semua member
     -->
-    <dl id="d" class="dl"></dl>
-    <a class="btn" href="index.xhtml">Kembali ke daftar game</a>
   </div>
 </main>
+<script src="assets/js/games.js"></script>
 <script src="assets/js/auth.js"></script>
-<script>
-//<![CDATA[
-(function () {
-  var q = new URLSearchParams(location.search), d = document.getElementById('d');
-  q.forEach(function (v, k) {
-    var dt = document.createElement('dt'), dd = document.createElement('dd');
-    dt.textContent = k; dd.textContent = v; d.appendChild(dt); d.appendChild(dd);
-  });
-  if (!d.children.length) d.textContent = 'Belum ada data pesanan.';
-})();
-//]]>
-</script>
+<script src="assets/js/pembayaran.js"></script>
 </body>
 </html>
