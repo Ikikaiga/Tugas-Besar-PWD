@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../koneksi.php';
+require '../../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('user_name', $row['username'], $expire, '/');
             setcookie('user_id', (string)$row['id'], $expire, '/');
 
-            header("Location: ../beranda/topup/index.xhtml");
+            header("Location: ../../beranda/topup/index.xhtml");
             exit;
         } else {
             header("Location: Login.xhtml?error=wrong_password");

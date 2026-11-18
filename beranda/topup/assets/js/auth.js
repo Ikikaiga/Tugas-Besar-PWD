@@ -18,10 +18,10 @@
       if (userName) {
         nav.innerHTML =
           '<span class="user-badge">Halo, ' + esc(userName) + '</span>' +
-          '<a class="btn sm" href="../../Login/logout.php">Keluar</a>';
+          '<a class="btn sm" href="../../Login/login/logout.php">Keluar</a>';
       } else {
         nav.innerHTML =
-          '<a class="btn gold sm" href="../../Login/Login.xhtml">Masuk</a>';
+          '<a class="btn gold sm" href="../../Login/login/Login.xhtml">Masuk</a>';
       }
     }
 
@@ -31,7 +31,7 @@
         e.preventDefault();
         e.stopImmediatePropagation();
         alert('Silakan login terlebih dahulu sebelum melanjutkan ke pembayaran.');
-        window.location.href = '../../Login/Login.xhtml';
+        window.location.href = '../../Login/login/Login.xhtml';
       }, true);
     }
   });
