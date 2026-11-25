@@ -1,0 +1,36 @@
+/* Bagian CSS buat Pembayaran ygy */
+
+.pembayaran {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pembayaran .opt > span {
+  height: 100%;
+}
+
+.pembayaran .opt .logoBayar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.pembayaran .logoBayar img {
+  display: block;
+  width: 65px;
+  height: 35px;
+  object-fit: contain;
+}
+
+#areaQRIS {
+  margin-top: 20px;
+}
+
+#kodeQR img {
+  width: 200px;
+  height: auto;
+}
