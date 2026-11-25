@@ -27,17 +27,28 @@
     <h2 id="totalHarga">Rp 0</h2>
 
     <h2>Metode Pembayaran</h2>
-    <div>
-      <label>
-        <input type="radio" id="transfer" name="metode" value="transfer"/>
-        Transfer Bank
-      </label>
-    </div>
 
-    <div>
-      <label>
+    <div class="packs">
+      <label class="opt">
+        <input type="radio" id="transfer" name="metode" value="transfer"/>
+        <span>
+          <b>Transfer Bank</b>
+          <div class="logoBayar">
+            <img src="assets/img/BCA.jpg" alt="BCA"/>
+            <img src="assets/img/BRI.jpg" alt="BRI"/>
+            <img src="assets/img/mandiri.jpg" alt="Mandiri"/>
+          </div>
+        </span>
+      </label>
+
+      <label class="opt">
         <input type="radio" id="qris" name="metode" value="qris"/>
-        QRIS
+        <span>
+          <b>QRIS</b>
+          <div class="logoBayar">
+            <img src="assets/img/QRIS.png" alt="QRIS"/>
+          </div>
+        </span>
       </label>
     </div>
 
