@@ -1,4 +1,4 @@
 <?php
-header("Location: login/Login.xhtml");
+header("Location: Login.xhtml");
 exit;
 ?>
