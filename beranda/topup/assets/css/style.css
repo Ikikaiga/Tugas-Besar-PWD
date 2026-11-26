@@ -27,7 +27,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .user-badge{font-weight:800;font-size:14px;background:#FFF6C2;border:var(--line);padding:6px 12px}
 .btn.sm{padding:6px 14px;font-size:14px}
 
-
 .btn{display:inline-block;background:#fff;border:var(--line);box-shadow:3px 3px 0 var(--ink);padding:10px 18px;font-weight:800;text-decoration:none;color:var(--ink);transition:transform .12s,box-shadow .12s}
 .btn:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 .btn.gold{background:var(--gold)}
@@ -62,8 +61,19 @@ h2,.h2{font-size:20px;font-weight:900;margin:0 0 14px}
 .bcap h1{margin:0;font-size:clamp(22px,4vw,32px);font-weight:900;line-height:1.1}
 .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 label.f{display:grid;gap:4px;font-weight:600;font-size:14px}
-input[type=text]{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0}
-input[type=text]:focus{outline:none;background:#FFF6C2}
+input[type=text], input[type=password], input[type=email]{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{outline:none;background:#FFF6C2}
+
+/* Tambahan styling textarea & toast agar persis mengikuti gaya input di atas */
+textarea{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0;resize:vertical}
+textarea:focus{outline:none;background:#FFF6C2}
+select{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0}
+select:focus{outline:none;background:#FFF6C2}
+#toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--paper);padding:12px 20px;font-weight:700;font-size:14px;border:var(--line);box-shadow:var(--sh);opacity:0;transform:translateY(20px);transition:opacity .25s ease,transform .25s ease;z-index:999;pointer-events:none}
+#toast.show{opacity:1;transform:translateY(0)}
+#toast.success{background:var(--gold);color:var(--ink)}
+#toast.error{background:#ff4d4d;color:#fff}
+
 .packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .opt{position:relative}
 .opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
@@ -91,3 +101,14 @@ input[type=text]:focus{outline:none;background:#FFF6C2}
   .bar .btn{width:100%;text-align:center}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+#page.narrow{max-width:820px}
+#viewUsername{margin-bottom:4px;font-size:28px}
+#page .card h2{margin-bottom:12px}
+#page .fields{margin-top:6px}
+#page input[type=email],#page select{font:inherit;padding:10px 12px;border:var(--line);background:#fff;width:100%;border-radius:0}
+#page input[type=email]:focus,#page select:focus{outline:none;background:#FFF6C2}
+#page textarea{min-height:110px}
+#page .btn{min-width:160px}
+#page hr{opacity:.75}
+#page .card:last-of-type{border-left:12px solid #ff4d4d}

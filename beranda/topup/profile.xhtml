@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Profil Saya – Topupin</title>
+
+    <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+
+<body>
+
+<div class="bg" aria-hidden="true">
+    <i></i><i></i><i></i>
+</div>
+
+<header class="top">
+    <div class="wrap bar0">
+
+        <a class="logo" href="index.xhtml">
+            <span class="logo-box">G</span>TOPUPIN
+        </a>
+
+        <div id="userNav" class="user-nav"></div>
+
+    </div>
+</header>
+
+<main class="wrap narrow" id="page">
+
+    <a class="back" href="index.xhtml">
+        Kembali ke beranda
+    </a>
+
+    <!-- PROFIL GAMER -->
+
+    <div class="card pad">
+
+        <h1 id="viewUsername" class="h2">
+            Memuat Profil...
+        </h1>
+
+        <p style="margin:0 0 20px 0;color:var(--mute);font-size:14px;">
+            Personalisasi profil gamer Anda.
+        </p>
+
+        <hr style="border:none;border-top:var(--line);margin:20px 0;" />
+
+        <h2 class="h2">Profil Gamer</h2>
+
+        <form
+            id="profileForm"
+            action="updacc.php"
+            method="post">
+
+            <div class="fields" style="margin-bottom:16px;">
+
+                <label class="f">
+                    Game Favorit
+
+                    <select
+                        id="gameFavorit"
+                        name="game_favorit">
+
+                        <option value="">Pilih Game</option>
+                        <option value="Mobile Legends">Mobile Legends</option>
+                        <option value="Valorant">Valorant</option>
+                        <option value="Steam Wallet">Steam Wallet</option>
+                        <option value="Roblox">Roblox</option>
+                        <option value="Warframe">Warframe</option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+            <div
+                class="fields"
+                style="grid-template-columns:1fr;margin-bottom:20px;">
+
+                <label class="f">
+                    Bio Singkat
+
+                    <textarea
+                        id="bio"
+                        name="bio"
+                        rows="3"
+                        placeholder="Contoh: MLBB enjoyer sejak season lama."></textarea>
+
+                </label>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn gold">
+
+                Simpan Profil
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- AKUN & KEAMANAN -->
+
+    <div class="card pad" style="margin-top:20px;">
+
+        <h2 class="h2">
+            Akun &amp; Keamanan
+        </h2>
+
+        <form
+            action="updacc.php"
+            method="post">
+
+            <div class="fields" style="margin-bottom:16px;">
+
+                <label class="f">
+                    Username
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Masukkan username"
+                        required="required"/>
+
+                </label>
+
+                <label class="f">
+                    Email
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="email@example.com"/>
+
+                </label>
+
+            </div>
+
+            <div class="fields" style="margin-bottom:20px;">
+
+                <label class="f">
+                    Password Baru
+
+                    <input
+                        type="password"
+                        id="passwordBaru"
+                        name="password_baru"
+                        placeholder="Kosongkan jika tidak ingin mengganti password"/>
+
+                </label>
+
+                <label class="f">
+                    Password Saat Ini
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        name="current_password"
+                        placeholder="••••••••"
+                        required="required"/>
+
+                </label>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn gold">
+
+                Simpan Perubahan
+
+            </button>
+
+        </form>
+
+        <hr style="border:none;border-top:var(--line);margin:24px 0;" />
+
+        <h2
+            class="h2"
+            style="color:#ff4d4d;">
+
+            Danger Zone
+
+        </h2>
+
+        <p style="margin-bottom:16px;">
+            Menghapus akun akan menghapus seluruh data akun secara permanen dan tidak dapat dipulihkan kembali.
+        </p>
+
+        <button
+            type="button"
+            class="btn"
+            onclick="konfirmasiHapusAkun()"
+            style="background:#ff4d4d;color:#fff;">
+
+            Hapus Akun
+
+        </button>
+
+    </div>
+
+</main>
+
+<div id="toast"></div>
+
+<script src="assets/js/auth.js?v=2"></script>
+<script src="assets/js/profile.js"></script>
+
+</body>
+
+</html>
