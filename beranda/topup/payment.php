@@ -1,7 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/config/payment_db.php';
-
+require __DIR__ . '/configResiPhp/payment_db.php';
 // Harga dan paket harus sama dengan games.js. Harga ditentukan ulang di server.
 $catalog = [
  'mlbb'=>['name'=>'Mobile Legends','packs'=>[['86 Diamond',22000],['172 Diamond',44000],['257 Diamond',65000],['344 Diamond',87000],['514 Diamond',130000],['706 Diamond',175000]],'fields'=>['uid'=>'User ID','zone'=>'Zone ID']],
@@ -30,67 +29,171 @@ $va=[];
 foreach($banks as $b=>$prefix) $va[$b]=$prefix.$digits;
 ?>
 <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pembayaran TOPUPIN</title>
-<link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/pembayaran.css"><link rel="stylesheet" href="assets/css/payment-extra.css">
+<link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/pembayaran.css"><link rel="stylesheet" href="assets/css/payment_extra.css">
 </head><body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top"><div class="wrap bar0"><a class="logo" href="index.xhtml"><span class="logo-box">G</span>TOPUPIN</a></div></header>
-<main class="wrap narrow"><section class="card pad">
-<h1 class="h2">Pembayaran</h1><p>Periksa detail pesanan, lalu pilih metode pembayaran.</p>
-<dl class="dl">
-<dt>Invoice</dt><dd><?=h($invoice)?></dd><dt>Game</dt><dd><?=h($game['name'])?></dd><dt>Nominal</dt><dd><?=h($item)?></dd>
-<?php foreach($account as $k=>$v): ?><dt><?=h($game['fields'][$k])?></dt><dd><?=h($v)?></dd><?php endforeach; ?>
-</dl><h2>Total pembayaran</h2><h2><?=rupiah($amount)?></h2>
-<form method="post" action="payment_process.php" id="paymentForm">
-<input type="hidden" name="csrf" value="<?=h($_SESSION['payment_csrf'])?>">
-<div class="packs pembayaran payment-methods">
-<label class="opt payment-method">
-  <input type="radio" name="method" value="TRANSFER_BANK" required>
-  <span><b>Transfer Bank</b><span class="logoBayar">
-    <img src="assets/img/BCA.jpg" alt="BCA"/>
-    <img src="assets/img/BRI.jpg" alt="BRI"/>
-    <img src="assets/img/mandiri.jpg" alt="Mandiri"/>
-  </span></span>
-</label>
-<label class="opt payment-method">
-  <input type="radio" name="method" value="QRIS" required>
-  <span><b>QRIS</b><span class="logoBayar">
-    <img src="assets/img/QRIS.jpg" alt="QRIS"/>
-  </span></span>
-</label>
-</div>
-<div id="qrisPanel" class="payment-panel" hidden>
-  <h2>Scan QRIS</h2><p>Scan kode QR berikut menggunakan aplikasi pembayaran yang mendukung QRIS.</p>
-  <img class="payment-qr" src="assets/img/QR_Bayar.png" alt="Kode QR pembayaran QRIS"/>
-  <p><b><?=rupiah($amount)?></b></p>
-</div>
-<div id="bankPanel" class="payment-panel" hidden>
-  <h2>Pilih Bank Tujuan</h2><div class="bank-options">
-  <?php foreach($va as $bank=>$number): ?>
-    <label class="bank-choice">
-      <input type="radio" name="bank" value="<?=h($bank)?>" data-va="<?=h($number)?>" />
-      <img src="assets/img/<?= $bank === 'MANDIRI' ? 'mandiri' : h($bank) ?>.jpg" alt="<?=h($bank)?>"/>
-      <span><?= $bank === 'MANDIRI' ? 'Bank Mandiri' : 'Bank '.h($bank) ?></span>
-    </label>
-  <?php endforeach; ?>
-  </div>
-  <div id="vaPanel" hidden><p>Nomor Virtual Account:</p><strong id="vaNumber"></strong> <button type="button" id="copyVa">Salin</button><p>Total: <?=rupiah($amount)?></p></div>
-</div>
-<p class="err" id="errorMsg"></p><button class="btn gold" type="submit">Konfirmasi dan Buat Resi</button>
-<a class="btn" href="index.xhtml">Batal</a></form></section></main>
-<script>
-const form=document.getElementById('paymentForm');
-form.querySelectorAll('[name=method]').forEach(el=>el.addEventListener('change',()=>{
- const isQr=el.value==='QRIS'&&el.checked, isBank=el.value==='TRANSFER_BANK'&&el.checked;
- document.getElementById('qrisPanel').hidden=!isQr; document.getElementById('bankPanel').hidden=!isBank;
 
-}));
-form.querySelectorAll('[name=bank]').forEach(el=>el.addEventListener('change',()=>{
- document.getElementById('vaNumber').textContent=el.dataset.va;document.getElementById('vaPanel').hidden=false;
-}));
-document.getElementById('copyVa').addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('vaNumber').textContent));
-form.addEventListener('submit',e=>{
- const method=form.querySelector('[name=method]:checked'), bank=form.querySelector('[name=bank]:checked');
- let msg='';if(!method)msg='Pilih metode pembayaran.';else if(method.value==='TRANSFER_BANK'&&!bank)msg='Pilih bank terlebih dahulu.';
- if(msg){e.preventDefault();document.getElementById('errorMsg').textContent=msg;}
+<main class="wrap narrow">
+  <section class="card pad simple-payment">
+
+    <h1>Pembayaran TOPUPIN</h1>
+
+    <p>Total yang Harus Dibayar</p>
+    <h2 class="payment-total">
+      <?= rupiah($amount) ?>
+    </h2>
+
+    <hr>
+
+    <h2>Metode Pembayaran</h2>
+
+    <form method="post"
+          action="payment_process.php"
+          id="paymentForm">
+
+      <input type="hidden"
+             name="csrf"
+             value="<?= h($_SESSION['payment_csrf']) ?>">
+
+      <div class="method-grid">
+
+        <label class="method-card">
+          <input type="radio"
+                 name="method"
+                 value="TRANSFER_BANK"
+                 checked required>
+          <span>Transfer Bank</span>
+        </label>
+
+        <label class="method-card">
+          <input type="radio"
+                 name="method"
+                 value="QRIS"
+                 required>
+          <span>QRIS</span>
+        </label>
+
+      </div>
+
+      <div id="bankPanel" class="simple-panel">
+
+        <h2>Pilih Bank Tujuan</h2>
+
+        <div class="bank-grid">
+
+          <label class="bank-card">
+            <input type="radio"
+                   name="bank"
+                   value="BCA">
+            <span>
+              <img src="assets/img/BCA.jpg" alt="BCA">
+              BCA
+            </span>
+          </label>
+
+          <label class="bank-card">
+            <input type="radio"
+                   name="bank"
+                   value="BRI">
+            <span>
+              <img src="assets/img/BRI.jpg" alt="BRI">
+              BRI
+            </span>
+          </label>
+
+          <label class="bank-card">
+            <input type="radio"
+                   name="bank"
+                   value="MANDIRI">
+            <span>
+              <img src="assets/img/mandiri.jpg" alt="Mandiri">
+              Mandiri
+            </span>
+          </label>
+
+        </div>
+      </div>
+
+      <div id="qrisPanel" class="simple-panel" hidden>
+
+        <h2>Scan QRIS</h2>
+
+        <img class="payment-qr"
+             src="assets/img/QR_Bayar.png"
+             alt="Kode QR Pembayaran">
+
+      </div>
+
+      <p id="errorMsg" class="err"></p>
+
+      <button class="btn-confirm" type="submit">
+        Konfirmasi Pembayaran
+      </button>
+
+      <a class="cancel-payment" href="index.xhtml">
+        Batal Pembayaran
+      </a>
+
+      <p class="simulation-note">
+        Pembayaran simulasi untuk tugas PWD.
+      </p>
+
+    </form>
+
+  </section>
+</main>
+
+<script>
+const form = document.getElementById('paymentForm');
+const bankPanel = document.getElementById('bankPanel');
+const qrisPanel = document.getElementById('qrisPanel');
+const errorMsg = document.getElementById('errorMsg');
+
+function updateMethod() {
+    const method = form.querySelector(
+        '[name="method"]:checked'
+    ).value;
+
+    const isTransfer = method === 'TRANSFER_BANK';
+
+    bankPanel.hidden = !isTransfer;
+    qrisPanel.hidden = isTransfer;
+
+    form.querySelectorAll('[name="bank"]').forEach(bank => {
+        bank.disabled = !isTransfer;
+    });
+
+    errorMsg.textContent = '';
+}
+
+form.querySelectorAll('[name="method"]').forEach(el => {
+    el.addEventListener('change', updateMethod);
 });
-</script></body></html>
+
+form.querySelectorAll('[name="bank"]').forEach(el => {
+    el.addEventListener('change', () => {
+        errorMsg.textContent = '';
+    });
+});
+
+form.addEventListener('submit', function(e) {
+    const method = form.querySelector(
+        '[name="method"]:checked'
+    );
+
+    const bank = form.querySelector(
+        '[name="bank"]:checked'
+    );
+
+    if (method.value === 'TRANSFER_BANK' && !bank) {
+        e.preventDefault();
+        errorMsg.textContent = 'Silakan pilih bank tujuan.';
+    }
+});
+
+updateMethod();
+</script>
+
+</body>
+</html>

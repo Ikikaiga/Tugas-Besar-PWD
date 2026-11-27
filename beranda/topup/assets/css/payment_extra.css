@@ -16,3 +16,162 @@
 #vaPanel{background:#fff;border:1px solid #ddd;border-radius:0}
 @media(max-width:560px){.payment-methods{grid-template-columns:1fr}.bank-options{grid-template-columns:1fr}}
 
+
+/* Tampilan pembayaran sederhana TOPUPIN */
+
+.simple-payment {
+    margin: 30px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+}
+
+.simple-payment h1 {
+    font-size: 24px;
+    margin: 0 0 18px;
+}
+
+.simple-payment h2 {
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.simple-payment .payment-total {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.simple-payment hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 24px 0;
+}
+
+.simple-payment .method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.simple-payment .bank-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.simple-payment .method-card,
+.simple-payment .bank-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.simple-payment .method-card input,
+.simple-payment .bank-card input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.simple-payment .method-card span,
+.simple-payment .bank-card span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    padding: 12px;
+    border: 2px solid #111;
+    background: #fff;
+    font-weight: 800;
+}
+
+.simple-payment .method-card span {
+    justify-content: flex-start;
+}
+
+.simple-payment .bank-card span {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.simple-payment .bank-card img {
+    width: 75px;
+    max-width: 100%;
+    height: 40px;
+    object-fit: contain;
+}
+
+.simple-payment input:checked + span {
+    background: #F5C800;
+}
+
+.simple-payment input:focus-visible + span {
+    outline: 3px solid #111;
+    outline-offset: 2px;
+}
+
+.simple-payment .simple-panel {
+    border: 2px solid #111;
+    padding: 16px;
+    margin-bottom: 16px;
+    background: #fff;
+}
+
+.simple-payment [hidden] {
+    display: none !important;
+}
+
+.simple-payment .payment-qr {
+    display: block;
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+}
+
+.simple-payment .btn-confirm {
+    width: 100%;
+    min-height: 60px;
+    border: 2px solid #111;
+    background: #F5C800;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.simple-payment .btn-confirm:hover {
+    background: #e8bc00;
+}
+
+.simple-payment .cancel-payment {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    color: #555;
+}
+
+.simple-payment .simulation-note {
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .simple-payment {
+        padding: 16px;
+    }
+
+    .simple-payment .bank-grid {
+        gap: 6px;
+    }
+
+    .simple-payment .bank-card span {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

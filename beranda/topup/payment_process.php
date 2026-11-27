@@ -1,7 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/config/payment_db.php';
-
+require __DIR__ . '/configResiPhp/payment_db.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ||
     empty($_SESSION['payment_order']) ||
     !hash_equals($_SESSION['payment_csrf'] ?? '', $_POST['csrf'] ?? '')) {

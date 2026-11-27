@@ -1,6 +1,6 @@
 (() => {
 // Halaman tujuan setelah pilih nominal. Dikerjakan temanmu: nanti lanjutin dari sini ya vin dkk.
-const PAYMENT_URL = 'pembayaran.xhtml';
+const PAYMENT_URL = 'payment.php';
 const $ = (s, r = document) => r.querySelector(s);
 const rp = n => 'Rp ' + n.toLocaleString('id-ID');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
