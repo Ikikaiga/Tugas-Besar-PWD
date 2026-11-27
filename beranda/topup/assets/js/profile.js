@@ -36,7 +36,7 @@
                 if (!result.success) {
 
                     window.location.href =
-                        "../../Login/login/Login.xhtml";
+                        "../../Login/Login.xhtml";
 
                     return;
 
