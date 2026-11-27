@@ -13,7 +13,7 @@
 <header class="top"><div class="wrap bar0">
   <a class="logo" href="index.xhtml"><span class="logo-box">G</span>TOPUPIN</a>
   <div id="userNav" class="user-nav">
-    <a class="btn gold sm" href="../../Login/Login.xhtml">Masuk</a>
+    <a class="btn gold sm" href="../../login/Login.xhtml">Masuk</a>
   </div>
 </div></header>
 <main class="wrap narrow">
@@ -75,18 +75,61 @@
       <a class="btn gold" href="index.xhtml">Kembali ke daftar game</a>
     </div>
 
-    <!--
-      DATA DARI order.xhtml (dua cara, pilih salah satu):
-      1) Query string: ?game=mlbb&pack=1&item=172+Diamond&price=44000&acc_uid=123&acc_zone=456
-         (kunci acc_* sesuai field game: mlbb=uid,zone | valorant=riot | steam=steam | roblox=user | warframe=ign)
-      2) sessionStorage 'gv_checkout' (JSON): {game, gameName, pack, item, price, account:{...}}
-      Catatan: kalau pakai backend, hitung ulang harga dari game + pack di server. Jangan percaya parameter price.- catatan by gustav pada semua member
-    -->
+    <form action="simpanResi.php" method="POST">
+
+    <input type="text"
+           name="nama"
+           placeholder="Nama pelanggan"
+           required="required"/>
+
+    <input type="text"
+           name="game"
+           placeholder="Nama game"
+           required="required"/>
+
+    <input type="text"
+           name="item"
+           placeholder="Paket yang dibeli"
+           required="required"/>
+
+    <input type="text"
+           name="user_game"
+           placeholder="User ID game"
+           required="required"/>
+
+    <input type="number"
+           name="amount"
+           placeholder="Total pembayaran"
+           required="required"/>
+
+    <select name="payment_method" required="required">
+        <option value="QRIS">QRIS</option>
+        <option value="TRANSFER_BANK">
+            Transfer Bank
+        </option>
+    </select>
+
+    <select name="bank" required="required">
+        <option value="BCA"></option>
+        <option value="BNI"></option>
+        <option value="MANDIRI"></option>
+    </select>
+
+    <input type="text"
+           name="va_number"
+           placeholder="Nomor Virtual Account"
+           required="required"/>
+
+    <button type="submit">
+        Bayar dan Buat Resi
+    </button>
+
+</form>
+
   </div>
 </main>
 <script src="assets/js/games.js"></script>
+<script src="assets/js/auth.js?v=2"></script>
 <script src="assets/js/pembayaran.js"></script>
 </body>
 </html>
-
-
