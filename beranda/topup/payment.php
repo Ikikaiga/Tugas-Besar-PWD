@@ -88,7 +88,7 @@ foreach($banks as $b=>$prefix) $va[$b]=$prefix.$digits;
                    value="BCA">
             <span>
               <img src="assets/img/BCA.jpg" alt="BCA">
-              BCA
+              BCA MOBILE
             </span>
           </label>
 
@@ -98,7 +98,7 @@ foreach($banks as $b=>$prefix) $va[$b]=$prefix.$digits;
                    value="BRI">
             <span>
               <img src="assets/img/BRI.jpg" alt="BRI">
-              BRI
+              BRImo
             </span>
           </label>
 
@@ -108,7 +108,7 @@ foreach($banks as $b=>$prefix) $va[$b]=$prefix.$digits;
                    value="MANDIRI">
             <span>
               <img src="assets/img/mandiri.jpg" alt="Mandiri">
-              Mandiri
+              Livin' by Mandiri
             </span>
           </label>
 
