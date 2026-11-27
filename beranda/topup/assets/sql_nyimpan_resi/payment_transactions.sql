@@ -1,0 +1,18 @@
+USE db_users;
+CREATE TABLE IF NOT EXISTS transactions (
+ id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ invoice_no VARCHAR(32) NOT NULL UNIQUE,
+ user_id INT NULL,
+ game VARCHAR(80) NOT NULL,
+ item_name VARCHAR(100) NOT NULL,
+ account_data JSON NOT NULL,
+ amount INT UNSIGNED NOT NULL,
+ payment_method ENUM('QRIS','TRANSFER_BANK') NOT NULL,
+ bank ENUM('BCA','BRI','MANDIRI') NULL,
+ va_number VARCHAR(30) NULL,
+ status ENUM('PENDING','PAID','FAILED','EXPIRED') NOT NULL DEFAULT 'PENDING',
+ created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ paid_at DATETIME NULL,
+ INDEX idx_user_id(user_id),
+ INDEX idx_created_at(created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

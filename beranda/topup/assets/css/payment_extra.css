@@ -1,0 +1,18 @@
+.payment-option{display:block;padding:12px;margin:12px 0;border:1px solid #d5d5d5;border-radius:10px;font-weight:700}.payment-panel{padding:16px;margin:8px 0 18px;border:1px solid #ddd;border-radius:10px;text-align:center}.payment-panel[hidden]{display:none}#qrcode{display:flex;justify-content:center;margin:16px auto}.bank-choice{display:inline-block;padding:10px;margin:5px;border:1px solid #ccc;border-radius:8px}.bank-choice input{margin-right:6px}#vaPanel{margin-top:16px;padding:12px;background:#f5f5f5;border-radius:8px}#vaPanel[hidden]{display:none}.receipt-head,.receipt-total{display:flex;justify-content:space-between;align-items:center}.paid{color:#167a39}.receipt-card{max-width:700px;margin:30px auto}.receipt-total{font-size:1.2rem;padding:15px 0}.receipt-total strong{font-size:1.5rem}@media print{.no-print,header,.bg{display:none!important}body{background:#fff!important}.receipt-card{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important}}
+
+/* Tampilan metode pembayaran mengikuti kartu pilihan pada halaman utama. */
+.payment-methods{margin:12px 0 18px}
+.payment-method>span{height:100%;min-height:112px}
+.payment-method .logoBayar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:12px;padding:0;border:0;background:transparent}
+.payment-method .logoBayar img{display:block;width:65px;height:38px;object-fit:contain}
+.payment-panel{background:#fff;border:2px solid #111;border-radius:0;box-shadow:3px 3px 0 #111;text-align:left}
+.payment-panel[hidden]{display:none}
+.payment-qr{display:block;width:220px;height:220px;max-width:100%;object-fit:contain;margin:16px auto;border:1px solid #ddd}
+.bank-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:14px 0}
+.bank-choice{display:flex;align-items:center;gap:8px;min-height:76px;background:#fff;border:2px solid #111;border-radius:0;padding:10px;margin:0;font-weight:800;cursor:pointer}
+.bank-choice:has(input:checked){background:#FFF6C2;box-shadow:3px 3px 0 #111}
+.bank-choice img{width:58px;height:40px;object-fit:contain}
+.bank-choice input{margin:0}
+#vaPanel{background:#fff;border:1px solid #ddd;border-radius:0}
+@media(max-width:560px){.payment-methods{grid-template-columns:1fr}.bank-options{grid-template-columns:1fr}}
+
