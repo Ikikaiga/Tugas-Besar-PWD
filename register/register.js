@@ -164,7 +164,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var registerBtn = document.querySelector('#registerForm .f-btn');
     showToast('Pendaftaran berhasil — Silakan masuk', 'success');
     setTimeout(function() {
-      launchExpandTransition(registerBtn, '../login/Login.xhtml');
+      launchExpandTransition(registerBtn, '../Login/Login.xhtml');
     }, 800);
   }
 
