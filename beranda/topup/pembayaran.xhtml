@@ -6,13 +6,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Pembayaran – Topupin</title>
 <link rel="stylesheet" href="assets/css/style.css"/>
+<link rel="stylesheet" href="assets/css/pembayaran.css"/>
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top"><div class="wrap bar0">
   <a class="logo" href="index.xhtml"><span class="logo-box">G</span>TOPUPIN</a>
   <div id="userNav" class="user-nav">
-    <a class="btn gold sm" href="../../Login/Login.xhtml">Masuk</a>
+    <a class="btn gold sm" href="../../login/Login.xhtml">Masuk</a>
   </div>
 </div></header>
 <main class="wrap narrow">
@@ -27,16 +28,17 @@
     <h2 id="totalHarga">Rp 0</h2>
 
     <h2>Metode Pembayaran</h2>
+
     <div>
       <label>
-        <input type="radio" id="transfer" name="metode" value="transfer"/>
+      <input type="radio" id="transfer" name="metode" value="transfer"/>
         Transfer Bank
       </label>
     </div>
 
     <div>
       <label>
-        <input type="radio" id="qris" name="metode" value="qris"/>
+         <input type="radio" id="qris" name="metode" value="qris"/>
         QRIS
       </label>
     </div>
@@ -50,7 +52,7 @@
       <p>Silahkan scan kode QR berikut.</p>
 
       <div id="kodeQR">
-        <img src="assets/img/QR_Bayar.png" alt="Kode QR pembayaran QRIS"/>
+        <img src="assets/img/QR_Bayar.png" alt="QR CODE" />
       </div>
 
       <button class="btn gold" id="btnKonfirmasiQRIS" type="button" onclick="konfirmasiQRIS()">Konfirmasi Pembayaran</button>
@@ -63,7 +65,7 @@
       <a class="btn gold" href="index.xhtml">Kembali ke daftar game</a>
     </div>
 
-<form action="simpan_resi.php" method="POST">
+    <form action="simpanResi.php" method="POST">
 
     <input type="text"
            name="nama"
@@ -98,9 +100,9 @@
     </select>
 
     <select name="bank">
-        <option value="BCA">BCA</option>
-        <option value="BRI">BRI</option>
-        <option value="MANDIRI">Mandiri</option>
+        <option value="BCA"></option>
+        <option value="BRI"></option>
+        <option value="MANDIRI"></option>
     </select>
 
     <input type="text"
@@ -113,10 +115,17 @@
 
 </form>
 
+    <!--
+      DATA DARI order.xhtml (dua cara, pilih salah satu):
+      1) Query string: ?game=mlbb&pack=1&item=172+Diamond&price=44000&acc_uid=123&acc_zone=456
+         (kunci acc_* sesuai field game: mlbb=uid,zone | valorant=riot | steam=steam | roblox=user | warframe=ign)
+      2) sessionStorage 'gv_checkout' (JSON): {game, gameName, pack, item, price, account:{...}}
+      Catatan: kalau pakai backend, hitung ulang harga dari game + pack di server. Jangan percaya parameter price.- catatan by gustav pada semua member
+    -->
   </div>
 </main>
 <script src="assets/js/games.js"></script>
-<script src="assets/js/auth.js"></script>
+<script src="assets/js/auth.js?v=2"></script>
 <script src="assets/js/pembayaran.js"></script>
 </body>
 </html>
