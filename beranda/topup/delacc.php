@@ -83,7 +83,7 @@ if (isset($_COOKIE['user_id'])) {
 }
 
 header(
-    'Location: ../../Login/login/Login.xhtml?msg=account_deleted'
+    'Location: ../../Login/Login.xhtml?msg=account_deleted'
 );
 
 exit;
