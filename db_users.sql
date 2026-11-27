@@ -24,4 +24,30 @@ COMMIT;
 
 
 
+CREATE TABLE IF NOT EXISTS transactions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    invoice_no VARCHAR(40) NOT NULL UNIQUE,
+    user_id INT NULL,
+
+    nama_pelanggan VARCHAR(100) NOT NULL,
+    game VARCHAR(100) NOT NULL,
+    item_name VARCHAR(100) NOT NULL,
+    user_game VARCHAR(150) NOT NULL,
+
+    amount DECIMAL(12,2) NOT NULL,
+    payment_method VARCHAR(30) NOT NULL,
+    bank VARCHAR(30) NULL,
+    va_number VARCHAR(50) NULL,
+
+    status ENUM(
+        'PENDING',
+        'PAID',
+        'FAILED'
+    ) DEFAULT 'PENDING',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
 
