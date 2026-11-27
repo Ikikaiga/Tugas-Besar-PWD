@@ -29,17 +29,27 @@
 
     <h2>Metode Pembayaran</h2>
 
-    <div>
-      <label>
-      <input type="radio" id="transfer" name="metode" value="transfer"/>
-        Transfer Bank
+    <div class="packs pembayaran">
+      <label class="opt">
+        <input type="radio" id="transfer" name="metode" value="transfer"/>
+        <span>
+          <b>Transfer Bank</b>
+          <span class="logoBayar">
+            <img src="assets/img/BCA.jpg" alt="BCA"/>
+            <img src="assets/img/BRI.jpg" alt="BRI"/>
+            <img src="assets/img/mandiri.jpg" alt="Mandiri"/>
+          </span>
+        </span>
       </label>
-    </div>
 
-    <div>
-      <label>
-         <input type="radio" id="qris" name="metode" value="qris"/>
-        QRIS
+      <label class="opt">
+        <input type="radio" id="qris" name="metode" value="qris"/>
+        <span>
+          <b>QRIS</b>
+          <span class="logoBayar">
+            <img src="assets/img/QRIS.jpg" alt="QRIS"/>
+          </span>
+        </span>
       </label>
     </div>
 
@@ -65,56 +75,6 @@
       <a class="btn gold" href="index.xhtml">Kembali ke daftar game</a>
     </div>
 
-    <form action="simpanResi.php" method="POST">
-
-    <input type="text"
-           name="nama"
-           placeholder="Nama pelanggan"
-           required>
-
-    <input type="text"
-           name="game"
-           placeholder="Nama game"
-           required>
-
-    <input type="text"
-           name="item"
-           placeholder="Paket yang dibeli"
-           required>
-
-    <input type="text"
-           name="user_game"
-           placeholder="User ID game"
-           required>
-
-    <input type="number"
-           name="amount"
-           placeholder="Total pembayaran"
-           required>
-
-    <select name="payment_method" required>
-        <option value="QRIS">QRIS</option>
-        <option value="TRANSFER_BANK">
-            Transfer Bank
-        </option>
-    </select>
-
-    <select name="bank">
-        <option value="BCA"></option>
-        <option value="BRI"></option>
-        <option value="MANDIRI"></option>
-    </select>
-
-    <input type="text"
-           name="va_number"
-           placeholder="Nomor Virtual Account">
-
-    <button type="submit">
-        Bayar dan Buat Resi
-    </button>
-
-</form>
-
     <!--
       DATA DARI order.xhtml (dua cara, pilih salah satu):
       1) Query string: ?game=mlbb&pack=1&item=172+Diamond&price=44000&acc_uid=123&acc_zone=456
@@ -129,3 +89,4 @@
 <script src="assets/js/pembayaran.js"></script>
 </body>
 </html>
+
