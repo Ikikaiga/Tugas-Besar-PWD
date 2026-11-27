@@ -1,18 +1,29 @@
 USE db_users;
 CREATE TABLE IF NOT EXISTS transactions (
- id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
- invoice_no VARCHAR(32) NOT NULL UNIQUE,
+ id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ invoice_no VARCHAR(40) NOT NULL UNIQUE,
  user_id INT NULL,
- game VARCHAR(80) NOT NULL,
+ nama_pelanggan VARCHAR(100) NOT NULL,
+ game VARCHAR(100) NOT NULL,
  item_name VARCHAR(100) NOT NULL,
- account_data JSON NOT NULL,
- amount INT UNSIGNED NOT NULL,
- payment_method ENUM('QRIS','TRANSFER_BANK') NOT NULL,
- bank ENUM('BCA','BRI','MANDIRI') NULL,
- va_number VARCHAR(30) NULL,
- status ENUM('PENDING','PAID','FAILED','EXPIRED') NOT NULL DEFAULT 'PENDING',
- created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
- paid_at DATETIME NULL,
- INDEX idx_user_id(user_id),
- INDEX idx_created_at(created_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ user_game VARCHAR(150) NOT NULL,
+ amount DECIMAL(12,2) NOT NULL,
+ payment_method VARCHAR(30) NOT NULL,
+ bank VARCHAR(30) NULL,
+ va_number VARCHAR(50) NULL,
+ status ENUM('PENDING','PAID','FAILED') DEFAULT 'PENDING',
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Jika tabel versi lama sudah ada, tambahkan kolom yang kurang tanpa DROP.
+SET @sql = IF((SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='transactions' AND COLUMN_NAME='nama_pelanggan')=0,
+ 'ALTER TABLE transactions ADD COLUMN nama_pelanggan VARCHAR(100) NULL', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+SET @sql = IF((SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='transactions' AND COLUMN_NAME='user_game')=0,
+ 'ALTER TABLE transactions ADD COLUMN user_game VARCHAR(150) NULL', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+SET @sql = IF((SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='transactions' AND COLUMN_NAME='account_data')>0,
+ 'ALTER TABLE transactions MODIFY COLUMN account_data JSON NULL', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+SET @sql = IF((SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='transactions' AND COLUMN_NAME='account_data')>0,
+ 'UPDATE transactions SET user_game = account_data WHERE user_game IS NULL AND CHAR_LENGTH(account_data)<=150', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
