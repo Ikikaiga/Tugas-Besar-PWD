@@ -1,12 +1,13 @@
-
 <?php
 session_start();
 include "koneksi.php";
 
+// Memastikan skrip hanya dapat diakses melalui pengiriman formulir POST.
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit("Akses tidak valid");
 }
 
+// Mengambil dan memvalidasi data pesanan serta metode pembayaran dari input POST.
 $invoice = "INV" . date("YmdHis") .
            rand(100, 999);
 
@@ -36,6 +37,7 @@ if (
     exit("Data transaksi tidak valid");
 }
 
+// Memvalidasi pilihan bank jika metode transfer dipilih atau mengosongkan data bank jika menggunakan QRIS.
 if ($method === 'TRANSFER_BANK') {
     if (!in_array($bank, ['BCA', 'BRI', 'MANDIRI'], true)) {
         exit("Bank tidak valid");
@@ -47,6 +49,7 @@ if ($method === 'TRANSFER_BANK') {
 
 $user_id = $_SESSION['user_id'] ?? null;
 
+// Menyimpan data transaksi yang sudah tervalidasi ke tabel transactions lalu mengarahkan ke halaman resi.
 $stmt = mysqli_prepare($koneksi, "
     INSERT INTO transactions
     (

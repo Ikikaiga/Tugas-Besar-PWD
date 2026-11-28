@@ -1,8 +1,12 @@
+// Mengatur tampilan navigasi akun pengguna serta membatasi pengiriman formulir pesanan jika belum login.
 (function () {
+    // Mengambil dan mendekode nilai cookie browser berdasarkan nama yang dicari.
     function getCookie(name) {
         var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         return match ? decodeURIComponent(match[2].replace(/\+/g, ' ')) : null;
     }
+
+    // Mengamankan karakter khusus HTML untuk mencegah serangan XSS saat menampilkan nama pengguna.
     function esc(s) {
         return String(s).replace(/[&<>"']/g, function (c) {
             return {
@@ -14,6 +18,8 @@
             }[c];
         });
     }
+
+    // Memperbarui tombol navigasi akun dan mencegah submit pemesanan apabila cookie user_name tidak ditemukan.
     window.addEventListener('DOMContentLoaded', function () {
         var userName = getCookie('user_name');
         var nav = document.getElementById('userNav');

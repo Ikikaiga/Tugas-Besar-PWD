@@ -1,9 +1,10 @@
+// Menambahkan kelas animasi transisi jika pengguna berpindah dari halaman login.
 if (sessionStorage.getItem('toRegister') === '1') {
   document.body.classList.add('from-login');
   sessionStorage.removeItem('toRegister');
 }
 
-// Build Neo-Brutalist 3D wall blocks — clustered bottom-right (mirror of login)
+// Membuat dan menampilkan elemen dekorasi balok geometris 3D mengambang di sisi kanan bawah layar.
 (function buildGeo(){
   var canvas = document.getElementById('geoCanvas');
   var rects = [
@@ -39,6 +40,7 @@ if (sessionStorage.getItem('toRegister') === '1') {
   });
 })();
 
+// Mengubah tampilan kata sandi antara tersembunyi dan terlihat disertai efek acak karakter.
 function togglePw(id, btn) {
   var inp = document.getElementById(id);
   var ico = btn.querySelector('.material-symbols-outlined');
@@ -106,6 +108,7 @@ function togglePw(id, btn) {
   }
 }
 
+// Menampilkan notifikasi toast sementara di layar sesuai pesan dan status yang diberikan.
 function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg;
@@ -116,6 +119,7 @@ function showToast(msg, type) {
   }, 3500);
 }
 
+// Mengarahkan pengguna ke halaman lain dengan efek animasi keluar.
 function goTo(url) {
   sessionStorage.setItem('fromRegister', '1');
   document.body.classList.add('leaving');
@@ -124,6 +128,7 @@ function goTo(url) {
   }, 460);
 }
 
+// Menjalankan animasi overlay layar penuh dari posisi tombol sebelum berpindah ke halaman tujuan.
 function launchExpandTransition(btnEl, targetUrl) {
   var overlay = document.getElementById('expandOverlay');
   var rect = btnEl.getBoundingClientRect();
@@ -143,6 +148,7 @@ function launchExpandTransition(btnEl, targetUrl) {
   }, 850);
 }
 
+// Memeriksa parameter URL untuk notifikasi serta memasang validasi input formulir registrasi saat halaman dimuat.
 window.addEventListener('DOMContentLoaded', function() {
   var params = new URLSearchParams(window.location.search);
   var error = params.get('error');
@@ -170,6 +176,16 @@ window.addEventListener('DOMContentLoaded', function() {
 
   var form = document.getElementById('registerForm');
   if (form) {
+    var regUser = document.getElementById('regUser');
+    if (regUser) {
+      regUser.addEventListener('input', function() {
+        if (regUser.value.indexOf('@') !== -1) {
+          regUser.value = regUser.value.replace(/@/g, '');
+          showToast('Username tidak boleh berupa email!', 'error');
+        }
+      });
+    }
+
     form.addEventListener('submit', function(e) {
       var u = document.getElementById('regUser').value.trim();
       var p = document.getElementById('regPass').value;
@@ -178,6 +194,12 @@ window.addEventListener('DOMContentLoaded', function() {
       if (!u || !p || !c) {
         e.preventDefault();
         showToast('Harap lengkapi semua kolom pendaftaran!', 'error');
+        return;
+      }
+      if (u.indexOf('@') !== -1) {
+        e.preventDefault();
+        showToast('Username tidak boleh berupa email!', 'error');
+        document.getElementById('regUser').focus();
         return;
       }
       if (u.length < 3) {

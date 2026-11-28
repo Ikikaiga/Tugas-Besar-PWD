@@ -1,4 +1,3 @@
-
 const detailPesanan = document.getElementById("detailPesanan");
 const totalHarga = document.getElementById("totalHarga");
 const pesanError = document.getElementById("pesanError");
@@ -7,7 +6,7 @@ const btnBatal = document.getElementById("btnBatal");
 const areaQRIS = document.getElementById("areaQRIS");
 const areaBerhasil = document.getElementById("areaBerhasil");
 
-//ambil data pesanan
+// Mengambil data rincian pesanan dari sessionStorage atau parameter URL.
 const params = new URLSearchParams(window.location.search);
 let dataPesanan = null;
 
@@ -17,7 +16,6 @@ try {
     dataPesanan = null;
 }
 
-// klo data sessionStorage kosong, ambil dari URL
 if (!dataPesanan || !dataPesanan.game) {
     const account = {};
 
@@ -35,7 +33,6 @@ if (!dataPesanan || !dataPesanan.game) {
     };
 }
 
-//ambil game dan harga paket
 const game = window.GAMES[dataPesanan.game];
 const packIndex = Number(dataPesanan.pack);
 
@@ -50,7 +47,7 @@ if (!game || dataPesanan.pack == null ||
     const paket = game.packs[packIndex];
     const harga = paket[1];
 
-    //detail pesanan
+    // Menambahkan baris label dan nilai rincian pesanan ke dalam daftar ringkasan pembayaran.
     function tambahDetail(label, nilai) {
         const dt = document.createElement("dt");
         const dd = document.createElement("dd");
@@ -73,12 +70,11 @@ if (!game || dataPesanan.pack == null ||
         tambahDetail(key.toUpperCase(), account[key]);
     }
 
-    //total harga
     totalHarga.textContent =
         "Rp " + harga.toLocaleString("id-ID");
 }
 
-//Lanjut bayar
+// Memproses pilihan metode pembayaran (Transfer Bank atau QRIS) saat tombol lanjut ditekan.
 function lanjutBayar() {
     var transfer = document.getElementById("transfer");
     var qris = document.getElementById("qris");
@@ -112,7 +108,7 @@ function lanjutBayar() {
     }
 }
 
-//Konfirmasi QRIS
+// Menyelesaikan transaksi QRIS dan menampilkan status pembayaran berhasil.
 function konfirmasiQRIS() {
     areaQRIS.hidden = true;
     areaBerhasil.hidden = false;
@@ -129,7 +125,7 @@ function konfirmasiQRIS() {
     sessionStorage.removeItem("gv_checkout");
 }
 
-// 7. Tombol Batal Bayar
+// Menghapus data checkout sementara dan mengembalikan pengguna ke halaman utama.
 function batalBayar() {
     sessionStorage.removeItem("gv_checkout");
     window.location.href = "index.xhtml";

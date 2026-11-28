@@ -1,9 +1,16 @@
+// Merender formulir pemesanan top up sesuai game yang dipilih dan memvalidasi input sebelum lanjut ke pembayaran.
 (() => {
-// Halaman tujuan setelah pilih nominal. Dikerjakan temanmu: nanti lanjutin dari sini ya vin dkk.
 const PAYMENT_URL = 'payment.php';
+
+// Mengambil elemen DOM pertama yang cocok dengan selektor CSS.
 const $ = (s, r = document) => r.querySelector(s);
+
+// Memformat angka menjadi string mata uang Rupiah Indonesia.
 const rp = n => 'Rp ' + n.toLocaleString('id-ID');
+
+// Mengamankan karakter khusus HTML untuk mencegah serangan XSS saat merender teks.
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
 const key = new URLSearchParams(location.search).get('game');
 const g = GAMES[key];
 const page = $('#page');

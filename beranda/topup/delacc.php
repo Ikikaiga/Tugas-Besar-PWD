@@ -15,7 +15,7 @@ if ($passwordInput === '') {
 
 $stmt = mysqli_prepare(
     $conn,
-    "SELECT password
+    "SELECT password, foto
      FROM akun
      WHERE id=?"
 );
@@ -61,6 +61,14 @@ if (!mysqli_stmt_execute($delete)) {
     die('Gagal menghapus akun');
 }
 
+// Hapus juga file foto profil milik akun ini
+if (!empty($user['foto']) && preg_match('/^[A-Za-z0-9_.-]+$/', $user['foto'])) {
+    $fileFoto = __DIR__ . '/uploads/avatar/' . $user['foto'];
+    if (is_file($fileFoto)) {
+        @unlink($fileFoto);
+    }
+}
+
 session_unset();
 session_destroy();
 
@@ -87,4 +95,4 @@ header(
 );
 
 exit;
-?>
+?>

@@ -1,3 +1,4 @@
+// Membuat dan menampilkan elemen dekorasi balok geometris 3D mengambang di sisi kiri bawah layar.
 (function buildGeo(){
   var canvas = document.getElementById('geoCanvas');
   var rects = [
@@ -33,6 +34,7 @@
   });
 })();
 
+// Mengubah tampilan kata sandi antara tersembunyi dan terlihat disertai efek acak karakter saat dibuka.
 function togglePw(id, btn) {
   var inp = document.getElementById(id);
   var ico = btn.querySelector('.material-symbols-outlined');
@@ -85,6 +87,7 @@ function togglePw(id, btn) {
   }
 }
 
+// Menampilkan notifikasi toast sementara di layar sesuai pesan dan tipe peringatan.
 function showToast(msg, type) {
   var toast = document.getElementById('toast');
   toast.textContent = msg;
@@ -94,6 +97,7 @@ function showToast(msg, type) {
   }, 3500);
 }
 
+// Membaca parameter error atau status logout pada URL untuk menampilkan notifikasi saat halaman dimuat.
 window.addEventListener('DOMContentLoaded', function() {
   var params = new URLSearchParams(window.location.search);
   var error = params.get('error');

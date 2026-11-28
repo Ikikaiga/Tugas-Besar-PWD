@@ -40,13 +40,67 @@
 
     <div class="card pad">
 
-        <h1 id="viewUsername" class="h2">
-            Memuat Profil...
-        </h1>
+        <!-- FOTO PROFIL (kiri) + NAMA (kanan) -->
 
-        <p style="margin:0 0 20px 0;color:var(--mute);font-size:14px;">
-            Personalisasi profil gamer Anda.
-        </p>
+        <div class="profile-head">
+
+            <div class="avatar" id="avatarBox">
+
+                <img
+                    id="avatarImg"
+                    class="hide"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    alt="Foto profil"/>
+
+                <span id="avatarInit" class="avatar-init">?</span>
+
+            </div>
+
+            <div class="profile-info">
+
+                <h1 id="viewUsername" class="h2">
+                    Memuat Profil...
+                </h1>
+
+                <p style="margin:0 0 12px 0;color:var(--mute);font-size:14px;">
+                    Personalisasi profil gamer Anda.
+                </p>
+
+                <div class="avatar-actions">
+
+                    <button
+                        type="button"
+                        id="btnGantiFoto"
+                        class="btn sm">
+
+                        Ganti Foto
+
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnHapusFoto"
+                        class="btn sm hide">
+
+                        Hapus Foto
+
+                    </button>
+
+                    <input
+                        type="file"
+                        id="fotoInput"
+                        class="hide"
+                        accept="image/jpeg,image/png,image/webp,image/gif"/>
+
+                </div>
+
+                <span class="avatar-hint">
+                    JPG, PNG, WEBP, atau GIF. Maksimal 2 MB.
+                </span>
+
+            </div>
+
+        </div>
 
         <hr style="border:none;border-top:var(--line);margin:20px 0;" />
 
@@ -219,4 +273,4 @@
 
 </body>
 
-</html>
+</html>

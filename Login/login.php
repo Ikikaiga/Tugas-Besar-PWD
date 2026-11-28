@@ -2,6 +2,7 @@
 session_start();
 require '../koneksi.php';
 
+// Memproses autentikasi login pengguna jika formulir dikirim melalui metode POST.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -11,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Mencari data akun pengguna di database berdasarkan username atau alamat email.
     $stmt = mysqli_prepare($conn, "SELECT id, username, password FROM akun WHERE username = ? OR email = ?");
     if (!$stmt) {
         die("Query error: " . mysqli_error($conn));
@@ -20,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
+    // Memverifikasi kecocokan kata sandi lalu menyimpan sesi dan cookie sebelum masuk ke beranda.
     if ($row = mysqli_fetch_assoc($result)) {
         $isMatch = ($password === $row['password']) || (password_verify($password, $row['password']));
 

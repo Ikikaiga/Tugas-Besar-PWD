@@ -2,11 +2,13 @@
 session_start();
 require '../koneksi.php';
 
+// Memproses permintaan pendaftaran akun baru jika dikirim melalui metode POST.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm  = $_POST['confirm_password'] ?? '';
 
+    // Memvalidasi kelengkapan input, panjang minimal karakter, serta kecocokan konfirmasi kata sandi.
     if ($username === '' || $password === '' || $confirm === '') {
         header("Location: register.xhtml?error=empty");
         exit;
@@ -27,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Cek apakah username sudah terdaftar di tabel akun
+    // Memeriksa apakah username sudah digunakan oleh akun lain di dalam database.
     $checkStmt = mysqli_prepare($conn, "SELECT id FROM akun WHERE username = ?");
     if (!$checkStmt) {
         die("Query error: " . mysqli_error($conn));
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     mysqli_stmt_close($checkStmt);
 
-    // Hash password dan simpan ke tabel akun
+    // Mengenkripsi kata sandi dan menyimpan data akun baru ke dalam tabel akun.
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $insertStmt = mysqli_prepare($conn, "INSERT INTO akun (username, password) VALUES (?, ?)");

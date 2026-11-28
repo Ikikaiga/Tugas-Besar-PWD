@@ -1,7 +1,8 @@
 <?php
 session_start();
 require __DIR__ . '/configResiPhp/payment_db.php';
-// Harga dan paket harus sama dengan games.js. Harga ditentukan ulang di server.
+
+// Mendefinisikan katalog paket dan harga resmi di sisi server untuk mencegah manipulasi harga.
 $catalog = [
  'mlbb'=>['name'=>'Mobile Legends','packs'=>[['86 Diamond',22000],['172 Diamond',44000],['257 Diamond',65000],['344 Diamond',87000],['514 Diamond',130000],['706 Diamond',175000]],'fields'=>['uid'=>'User ID','zone'=>'Zone ID']],
  'valorant'=>['name'=>'Valorant','packs'=>[['475 VP',49000],['1000 VP',100000],['2050 VP',200000],['3650 VP',350000],['5350 VP',500000]],'fields'=>['riot'=>'Riot ID']],
@@ -9,6 +10,8 @@ $catalog = [
  'roblox'=>['name'=>'Roblox','packs'=>[['80 Robux',15000],['400 Robux',75000],['800 Robux',150000],['1.700 Robux',300000],['4.500 Robux',750000]],'fields'=>['user'=>'Username Roblox']],
  'warframe'=>['name'=>'Warframe','packs'=>[['75 Platinum',15000],['170 Platinum',33000],['370 Platinum',68000],['1.000 Platinum',170000],['2.100 Platinum',340000]],'fields'=>['ign'=>'Nama in-game']]
 ];
+
+// Memvalidasi parameter game, indeks paket, dan kelengkapan data akun game dari URL.
 $gameKey=$_GET['game']??''; $packIndex=filter_input(INPUT_GET,'pack',FILTER_VALIDATE_INT);
 if (!isset($catalog[$gameKey]) || $packIndex===false || $packIndex===null || !isset($catalog[$gameKey]['packs'][$packIndex])) {
  http_response_code(400); exit('Data pesanan tidak valid. Silakan ulangi pemesanan.');
@@ -20,6 +23,8 @@ foreach($game['fields'] as $key=>$label) {
  if($v==='') { http_response_code(400); exit('Data '.$label.' wajib diisi.'); }
  $account[$key]=$v;
 }
+
+// Membuat nomor invoice, token CSRF, serta menyimpan detail pesanan ke dalam sesi server.
 $invoice='TPN'.date('ymd').strtoupper(bin2hex(random_bytes(3)));
 $_SESSION['payment_order']=['invoice'=>$invoice,'game_key'=>$gameKey,'game'=>$game['name'],'item'=>$item,'amount'=>$amount,'account'=>$account];
 $_SESSION['payment_csrf']=bin2hex(random_bytes(24));
@@ -150,6 +155,7 @@ const bankPanel = document.getElementById('bankPanel');
 const qrisPanel = document.getElementById('qrisPanel');
 const errorMsg = document.getElementById('errorMsg');
 
+// Mengatur tampilan panel pilihan bank atau QRIS sesuai metode pembayaran yang dipilih.
 function updateMethod() {
     const method = form.querySelector(
         '[name="method"]:checked'
@@ -177,6 +183,7 @@ form.querySelectorAll('[name="bank"]').forEach(el => {
     });
 });
 
+// Memastikan bank tujuan sudah dipilih sebelum formulir pembayaran dikirimkan.
 form.addEventListener('submit', function(e) {
     const method = form.querySelector(
         '[name="method"]:checked'

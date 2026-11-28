@@ -16,7 +16,7 @@ $id = $_SESSION['user_id'];
 
 $stmt = mysqli_prepare(
     $conn,
-    "SELECT username, email, bio, game_favorit
+    "SELECT username, email, bio, game_favorit, foto
      FROM akun
      WHERE id = ?"
 );
@@ -53,4 +53,4 @@ if ($user) {
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
-?>
+?>

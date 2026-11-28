@@ -1,4 +1,5 @@
 <?php
+// Menghapus seluruh data sesi dan cookie pengguna yang aktif lalu mengarahkan kembali ke halaman login.
 session_start();
 session_unset();
 session_destroy();

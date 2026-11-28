@@ -1,4 +1,4 @@
-// Data game: dipakai index.xhtml dan order.xhtml. Harga contoh, ganti sesuai kebutuhan.
+// Menyimpan data konfigurasi katalog game, mata uang, form input akun, dan daftar paket harga.
 window.GAMES = {
  mlbb:{name:'Mobile Legends',currency:'Diamond',color:'#F5C800',img:'assets/img/mlbb.jpg',pos:'center',
   fields:[{id:'uid',label:'User ID',ph:'12345678',pattern:'\\d{5,12}'},{id:'zone',label:'Zone ID',ph:'1234',pattern:'\\d{3,6}'}],

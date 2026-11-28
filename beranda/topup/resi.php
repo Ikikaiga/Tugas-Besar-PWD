@@ -2,12 +2,14 @@
 session_start();
 require __DIR__ . '/../../koneksi.php';
 
+// Mengambil nomor invoice dari parameter URL dan memeriksa ketersediaannya.
 $invoice = trim($_GET['invoice'] ?? '');
 if ($invoice === '') {
     http_response_code(400);
     exit('Nomor invoice tidak diberikan.');
 }
 
+// Mencari data transaksi di database berdasarkan nomor invoice yang diberikan.
 $stmt = mysqli_prepare($conn, "SELECT * FROM transactions WHERE invoice_no = ? LIMIT 1");
 mysqli_stmt_bind_param($stmt, "s", $invoice);
 mysqli_stmt_execute($stmt);
@@ -20,10 +22,13 @@ if (!$data) {
     exit('Resi pembayaran tidak ditemukan.');
 }
 
+// Mengurai data akun game pelanggan dari format JSON menjadi array untuk ditampilkan di resi.
 $account = json_decode($data['user_game'], true);
 if (!is_array($account)) {
     $account = ['Akun Game' => $data['user_game']];
 }
+
+// Mengamankan karakter khusus HTML saat menampilkan detail transaksi pada halaman resi.
 function h($value) {
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
