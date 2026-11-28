@@ -1,5 +1,4 @@
 <?php
-// Koneksi menggunakan database utama db_users milik project.
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 function payment_db(): mysqli {
     static $db = null;
